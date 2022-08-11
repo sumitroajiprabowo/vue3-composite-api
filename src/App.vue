@@ -1,23 +1,31 @@
 <template>
-<div>{{ message }}</div>
+<div>{{ user }}</div>
+
+<div>
+  {{ user.name}}
+  {{ user.age }}
+</div>
+
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 export default {
   setup(){
-    // create variable to hold message value
-    const message = ref('Hello World')
+    const user = reactive({
+      name: 'John Doe',
+      age: 30
+    })
 
     setTimeout(() => {
-      // update message value
-      message.value = 'Goodbye World'
+      user.age = 35
     }, 1000)
-
     // return object with message property
     return {
-      message
+      user
     }
+
   }
+
 }
 </script>
