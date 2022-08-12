@@ -1,18 +1,22 @@
 <script setup>
 import { ref } from 'vue'
 
-const titleClass = ref('title')
+const count = ref(0)
+const count2 = ref(0)
+
+// increment the count
+const increment = () => {
+  count.value++
+}
+
+function incrementcount() {
+  count2.value++
+}
+
 </script>
 
 <template>
-  <h1 :class="titleClass">Make me red</h1>
+  <!-- make this button work -->
+  <button @click="increment">count is: {{ count }}</button>
+  <button @click="incrementcount">count is: {{ count2 }}</button>
 </template>
-
-<style>
-.title {
-  color: red;
-  text-align: center;
-  font-size: 2rem;
-  font-style: normal;
-}
-</style>
