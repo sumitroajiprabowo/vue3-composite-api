@@ -7,8 +7,13 @@ onMounted(() => {
   p.value.textContent = 'Hello World'
 })
 
+const update = () => {
+  p.value.textContent = 'Hello World Update'
+}
+
 </script>
 
 <template>
   <p ref="p">hello</p>
+  <button @click="update">update</button>
 </template>
