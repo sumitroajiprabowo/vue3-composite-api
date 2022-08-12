@@ -1,31 +1,19 @@
-<template>
-<div>{{ user }}</div>
+<script setup>
+import { reactive, ref } from 'vue'
 
-<div>
-  {{ user.name}}
-  {{ user.age }}
-</div>
+const counter = reactive({ count: 0 })
+const message = ref('Hello World!')
 
-</template>
+setTimeout(() => {
+  message.value = 'Goodbye World!'
+  counter.count++
+}, 1000)
 
-<script>
-import { reactive } from 'vue'
-export default {
-  setup(){
-    const user = reactive({
-      name: 'John Doe',
-      age: 30
-    })
 
-    setTimeout(() => {
-      user.age = 35
-    }, 1000)
-    // return object with message property
-    return {
-      user
-    }
-
-  }
-
-}
 </script>
+
+<template>
+  <h1>{{ message }}</h1>
+  <h1>{{ message.split('').reverse().join('') }}</h1>
+  <p>Count is: {{ counter.count }}</p>
+</template>
