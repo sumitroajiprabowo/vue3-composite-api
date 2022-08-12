@@ -1,38 +1,51 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-// give each todo a unique id
 let id = 0
 
 const newTodo = ref('')
+const hideCompleted = ref(false)
 const todos = ref([
-  { id: id++, text: 'Learn HTML' },
-  { id: id++, text: 'Learn JavaScript' },
-  { id: id++, text: 'Learn Vue' }
+  { id: id++, text: 'Learn HTML', done: true },
+  { id: id++, text: 'Learn JavaScript', done: true },
+  { id: id++, text: 'Learn Vue', done: false }
 ])
 
-// add a new todo to the list
-// if value is empty, do nothing
+const filteredTodos = computed(() => {
+  return hideCompleted.value
+    ? todos.value.filter((t) => !t.done)
+    : todos.value
+})
+
 function addTodo() {
-  if (!newTodo.value) return
-  todos.value.push({ id: id++, text: newTodo.value })
+  todos.value.push({ id: id++, text: newTodo.value, done: false })
   newTodo.value = ''
 }
 
 function removeTodo(todo) {
-  todos.value = todos.value.filter(t => t.id !== todo.id)
+  todos.value = todos.value.filter((t) => t !== todo)
 }
 </script>
 
 <template>
   <form @submit.prevent="addTodo">
-    <input v-model="newTodo">
-    <button>Add Todo</button>    
+    <input v-model="newTodo" />
+    <button>Add Todo</button>
   </form>
   <ul>
     <li v-for="todo in todos" :key="todo.id">
-      {{ todo.text }}
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{ done: todo.done }">{{ todo.text }}</span>
       <button @click="removeTodo(todo)">X</button>
     </li>
   </ul>
+  <button @click="hideCompleted = !hideCompleted">
+    {{ hideCompleted ? 'Show all' : 'Hide completed' }}
+  </button>
 </template>
+
+<style>
+.done {
+  text-decoration: line-through;
+}
+</style>
