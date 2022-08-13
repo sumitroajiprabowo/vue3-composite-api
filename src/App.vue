@@ -2,10 +2,11 @@
 import { ref } from 'vue'
 import ChildComp from './components/Child.vue'
 
-const childMsg = ref('No child msg yet')
+const msg = ref('from parent')
 </script>
 
 <template>
-  <ChildComp @response="(msg) => childMsg = msg" />
-  {{ childMsg }}
+  <ChildComp>
+    {{ msg}}
+  </ChildComp>
 </template>
