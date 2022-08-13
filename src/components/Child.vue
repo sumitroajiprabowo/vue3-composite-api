@@ -1,5 +1,9 @@
+<script setup>
+const props = defineProps({
+  msg: String
+})
+</script>
+
 <template>
-<div>
-    This is child component
-</div>
+  <h2>{{ msg || 'No props passed yet' }}</h2>
 </template>

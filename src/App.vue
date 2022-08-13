@@ -1,8 +1,10 @@
 <script setup>
-import ChildComponent from './components/Child.vue'
+import { ref } from 'vue'
+import ChildComp from './components/Child.vue'
+
+const greeting = ref('Hello from parent')
 </script>
 
 <template>
-  <!-- render child component -->
-  <ChildComponent />
+  <ChildComp :msg="greeting" />
 </template>
