@@ -1,26 +1,14 @@
 <template>
-<pre> {{ name}} </pre>
-<pre> {{ age }} </pre>
+<nav>
+  <router-link to="/">Home</router-link>
+  <router-link to="/about">About</router-link>
+  <router-link to="/contact">Contact</router-link>
+</nav>
+<hr />
 
-<UserComponent v-model:name="name" v-model:age="age" />
+<router-view></router-view>
 </template>
 
 
 <script>
-import { ref } from 'vue'
-import UserComponent from './components/User.vue'
-
-export default {
-  components: {
-    UserComponent,
-  },
-  setup(){
-    const name = ref("");
-    const age = ref(0);
-    return {
-      name,
-      age,
-    };
-  },
-};
 </script>
