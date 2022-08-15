@@ -27,27 +27,27 @@ const routes = [
         children: [
             {
                 path: "",
-                name: "home",
+                name: "Home",
                 component: Home
             },
             {
                 path: "about",
-                name: "about",
+                name: "About",
                 component: About
             },
             {
                 path: "contact",
-                name: "contact",
+                name: "Contact",
                 component: Contact
             },
             {
                 path: "posts",
-                name: "posts",
+                name: "Posts",
                 component: Posts
             },
             {
                 path: "posts/:id",
-                name: "post",
+                name: "Post",
                 component: Post
             }
         ]
@@ -57,6 +57,19 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes
+});
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = JSON.parse(localStorage.getItem("authenticated"));
+    if (to.name !== "Login" && !isAuthenticated) {
+        next({ name: "Login" });
+    }
+    else if (to.name === "Dashboard" && isAuthenticated) {
+        next({ name: "Dashboard" });
+    }
+    else {
+        next();
+    }
 });
 
 export default router;

@@ -21,7 +21,8 @@ export default {
         });
         const login = () => {
             if (data.username === 'admin' && data.password === 'admin') {
-                router.push('/');
+                localStorage.setItem('authenticated', true);
+                router.push({ name: 'Home' });
             }
         }
         return {
